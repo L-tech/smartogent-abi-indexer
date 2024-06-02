@@ -1,4 +1,5 @@
 import settings
+import uvicorn
 from fastapi import FastAPI, HTTPException, UploadFile, File
 import os
 import shutil
@@ -59,5 +60,5 @@ async def upload_documents(file: UploadFile = File(...), chunk_size: int = 8000,
         raise HTTPException(status_code=500, detail=response.error or "Failed to index knowledge base.")
 
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = os.getenv("PORT") or 8080
+    uvicorn.run(app, host="127.0.0.1", port=int(port))
