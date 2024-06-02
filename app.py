@@ -13,7 +13,6 @@ load_dotenv()
 
 app = FastAPI()
 
-
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
@@ -61,4 +60,4 @@ async def upload_documents(file: UploadFile = File(...), chunk_size: int = 8000,
 
 if __name__ == "__main__":
     port = os.getenv("PORT") or 8080
-    uvicorn.run(app, host="127.0.0.1", port=int(port))
+    uvicorn.run(app, host="0.0.0.0", port=int(port))
